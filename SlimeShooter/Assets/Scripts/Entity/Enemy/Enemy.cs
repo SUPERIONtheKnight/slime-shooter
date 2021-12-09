@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
 		enemy = GetComponent<Rigidbody>();
 		otherEnemy = FindObjectOfType<Enemy>();
 
-		Physics.IgnoreCollision(GetComponent<BoxCollider>(), player.GetComponent<SphereCollider>());
+		Physics.IgnoreCollision(GetComponent<BoxCollider>(), player.GetComponent<BoxCollider>());
 		Physics.IgnoreCollision(GetComponent<BoxCollider>(), otherEnemy.GetComponent<BoxCollider>());
 		guardPosition = gameObject.transform.position;
 	}
@@ -64,20 +64,20 @@ public class Enemy : MonoBehaviour {
 		if (distanceToPlayer >= maxFollowRange) followPlayer = false;
 	}
 	private void Shoot() {
-		bool shoot = false;
-		if (bulletCooldown > 0.0f) {
-			bulletCooldown -= Time.fixedDeltaTime;
-		} else {
-			shoot = true;
-			bulletCooldown = setBulletCooldown;
-		}
-		if (shoot == true) {
-			GameObject bullet = GetComponent<BulletObjectPool>().GetFreeBullet();
-			if (bullet) {
-				bullet.transform.position = transform.position;
-				bullet.SetActive(true);
-				bullet.GetComponent<Bullet>().speed *= GetComponent<Enemy>().xDirection;
-			}
-		}
+		//bool shoot = false;
+		//if (bulletCooldown > 0.0f) {
+		//	bulletCooldown -= Time.fixedDeltaTime;
+		//} else {
+		//	shoot = true;
+		//	bulletCooldown = setBulletCooldown;
+		//}
+		//if (shoot == true) {
+		//	GameObject bullet = GetComponent<BulletObjectPool>().GetFreeBullet();
+		//	if (bullet) {
+		//		bullet.transform.position = transform.position;
+		//		bullet.SetActive(true);
+		//		bullet.GetComponent<Bullet>().speed *= GetComponent<Enemy>().xDirection;
+		//	}
+		//}
 	}
 }

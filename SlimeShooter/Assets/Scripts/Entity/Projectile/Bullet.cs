@@ -1,21 +1,22 @@
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-	public float speed, setBulletTimer = 15.0f;
+	public float xDirection = 1.0f;
+	[SerializeField] private float setBulletTimer = 15.0f;
 	[SerializeField] private float setSpeed = 25.0f;
 	[SerializeField] private LayerMask floor;
-	private float bulletTimer;
+	[SerializeField] private float speed, bulletTimer;
 	private Rigidbody rb;
 	private Vector3 previousPosition;
 	private void OnEnable() {
 		speed = setSpeed;
 		bulletTimer = setBulletTimer;
-	}
-	private void Start() {
-		rb = GetComponent<Rigidbody>();
-		previousPosition = gameObject.transform.position;
 		
-		rb.velocity = new Vector3(speed, rb.velocity.y, rb.velocity.z);
+		rb = gameObject.GetComponent<Rigidbody>();
+		
+		rb.velocity = new Vector3(speed * xDirection, rb.velocity.y, rb.velocity.z);
+		
+		previousPosition = gameObject.transform.position;
 	}
 	private void FixedUpdate() {
 		if (bulletTimer > 0) {
